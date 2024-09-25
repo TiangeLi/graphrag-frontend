@@ -7,7 +7,7 @@ import {
   type ChatModelAdapter,
 } from "@assistant-ui/react";
 
-const SERVER_URL: string = process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:8000/chat";
+const SERVER_URL: string = process.env.NEXT_PUBLIC_SERVER_URL;
 
 type Content = {
   type: "text" | "tool-call";
