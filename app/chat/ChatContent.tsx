@@ -51,7 +51,7 @@ export default function ChatContent() {
     const base_url = process.env.NEXT_PUBLIC_BACKEND_URL || '';
     const server = searchParams.get('server');
     if (server === 'bph') {
-      setServerUrl(base_url + '/bph/chat');
+      setServerUrl(base_url + 'bph/chat');
       setWelcomeConfig({
         message: "Ask me anything about BPH!",
         suggestions: [
@@ -60,7 +60,7 @@ export default function ChatContent() {
         ],
       });
     } else if (server === 'all_guidelines') {
-      setServerUrl(base_url + '/cua/chat');
+      setServerUrl(base_url + 'cua/chat');
       setWelcomeConfig({
         message: "Ask me anything about the CUA guidelines!",
         suggestions: [
