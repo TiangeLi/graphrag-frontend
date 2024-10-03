@@ -48,37 +48,30 @@ export default function ChatContent() {
   });
 
   useEffect(() => {
+    const base_url = process.env.NEXT_PUBLIC_BACKEND_URL || '';
     const server = searchParams.get('server');
     if (server === 'bph') {
-      setServerUrl(process.env.NEXT_PUBLIC_BACKEND_URL_BPH || '');
+      setServerUrl(base_url + '/bph/chat');
       setWelcomeConfig({
         message: "Ask me anything about BPH!",
         suggestions: [
-          {
-            prompt: "How does Rezum work for BPH?",
-          },
-          {
-            prompt: "What are the possible side effects of Urolift?",
-          },
+          { prompt: "How does Rezum work for BPH?" },
+          { prompt: "What are the possible side effects of Urolift?" },
         ],
       });
     } else if (server === 'all_guidelines') {
-      setServerUrl(process.env.NEXT_PUBLIC_BACKEND_URL_ALL_GUIDELINES || '');
+      setServerUrl(base_url + '/cua/chat');
       setWelcomeConfig({
         message: "Ask me anything about the CUA guidelines!",
         suggestions: [
-          {
-            prompt: "What are the indications for timely cystectomy in NMIBC?",
-          },
-          {
-            prompt: "What is the postop surveillance schedule for RCC?",
-          }
+          { prompt: "What are the indications for timely cystectomy in NMIBC?" },
+          { prompt: "What is the postop surveillance schedule for RCC?" },
         ],
       });
     } else {
-      setServerUrl(process.env.NEXT_PUBLIC_BACKEND_URL_ALL_GUIDELINES || '');
+      setServerUrl(null);
       setWelcomeConfig({
-        message: "Ask me anything about the CUA guidelines!",
+        message: "Ask me anything!",
         suggestions: [],
       });
     }
