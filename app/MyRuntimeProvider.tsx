@@ -1,6 +1,7 @@
 "use client";
  
 import type { ReactNode } from "react";
+import { useMemo } from "react";
 import {
   AssistantRuntimeProvider,
   useLocalRuntime,
@@ -148,10 +149,12 @@ const createModelAdapter = (serverUrl: string): ChatModelAdapter => ({
     children: ReactNode;
     serverUrl: string;
   }>) {
-    const runtime = useLocalRuntime(createModelAdapter(serverUrl));
+    const runtime = useMemo(() => {
+      return useLocalRuntime(createModelAdapter(serverUrl));
+    }, [serverUrl]);
   
     return (
-      <AssistantRuntimeProvider runtime={runtime}>
+      <AssistantRuntimeProvider runtime={runtime} key={serverUrl}>
         {children}
       </AssistantRuntimeProvider>
     );

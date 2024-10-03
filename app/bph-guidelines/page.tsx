@@ -38,20 +38,20 @@ const MainThread: FC<ThreadConfig> = (config) => {
     );
   };
 
-export default function Page2() {
-  return (
-    <MyRuntimeProvider serverUrl={process.env.NEXT_PUBLIC_BACKEND_URL+"bph/chat"}>
-
-    <MainThread 
-      welcome={{
-        suggestions: [
-            { prompt: "How does Rezum work?" },
-            { prompt: "What are the possible side effects of Urolift?" },
-        ],
-      }}
-      tools={[SuggestionBtnTool]} 
-      assistantMessage={{ components: { Text: MarkdownText } }} 
-    />
-    </MyRuntimeProvider>
-  );
-}
+  export default function Page2() {
+    const serverUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}cua/chat`;
+    return (
+      <MyRuntimeProvider serverUrl={serverUrl}>
+        <MainThread 
+          welcome={{
+            suggestions: [
+              { prompt: "How does Rezum work?" },
+              { prompt: "What are the possible side effects of Urolift?" },
+            ],
+          }}
+          tools={[SuggestionBtnTool]} 
+          assistantMessage={{ components: { Text: MarkdownText } }} 
+        />
+      </MyRuntimeProvider>
+    );
+  }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
+
 import { MyRuntimeProvider } from "@/app/MyRuntimeProvider";
 import { Button } from "@/components/ui/button";
 import { Thread } from "@assistant-ui/react";
@@ -37,20 +37,20 @@ const MainThread: FC<ThreadConfig> = (config) => {
       </Thread.Root>
     );
   };
-export default function Page1() {
-  return (
-    <MyRuntimeProvider serverUrl={process.env.NEXT_PUBLIC_BACKEND_URL+"cua/chat"}>
-
-          <MainThread 
-            welcome={{
-              suggestions: [
-                { prompt: "What is the postop surveillance schedule for RCC?" },
-                { prompt: "What are the indications for timely cystectomy in NMIBC?" },
-              ],
-            }}
-            tools={[SuggestionBtnTool]} 
-            assistantMessage={{ components: { Text: MarkdownText } }} 
-          />
-    </MyRuntimeProvider>
-  );
-}
+  export default function Page1() {
+    const serverUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}cua/chat`;
+    return (
+      <MyRuntimeProvider serverUrl={serverUrl}>
+        <MainThread 
+          welcome={{
+            suggestions: [
+              { prompt: "What is the postop surveillance schedule for RCC?" },
+              { prompt: "What are the indications for timely cystectomy in NMIBC?" },
+            ],
+          }}
+          tools={[SuggestionBtnTool]} 
+          assistantMessage={{ components: { Text: MarkdownText } }} 
+        />
+      </MyRuntimeProvider>
+    );
+  }
