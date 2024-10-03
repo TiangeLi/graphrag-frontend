@@ -141,24 +141,7 @@ const createModelAdapter = (serverUrl: string): ChatModelAdapter => ({
     }
   });
  
-  export function MyRuntimeProvider_BPH({
-    children,
-    serverUrl,
-  }: Readonly<{
-    children: ReactNode;
-    serverUrl: string;
-  }>) {
-    const runtime = useLocalRuntime(createModelAdapter(serverUrl));
-  
-    return (
-      <AssistantRuntimeProvider runtime={runtime}>
-        {children}
-      </AssistantRuntimeProvider>
-    );
-  }
-
-
-  export function MyRuntimeProvider_CUA({
+  export function MyRuntimeProvider({
     children,
     serverUrl,
   }: Readonly<{

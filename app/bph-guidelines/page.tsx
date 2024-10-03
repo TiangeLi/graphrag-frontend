@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { MyRuntimeProvider_BPH } from "@/app/MyRuntimeProvider";
+import { MyRuntimeProvider } from "@/app/MyRuntimeProvider";
 import { Button } from "@/components/ui/button";
 import { Thread } from "@assistant-ui/react";
 import { makeMarkdownText } from "@assistant-ui/react-markdown";
@@ -40,7 +40,7 @@ const MainThread: FC<ThreadConfig> = (config) => {
 
 export default function Page2() {
   return (
-    <MyRuntimeProvider_BPH serverUrl={process.env.NEXT_PUBLIC_BACKEND_URL+"bph/chat"}>
+    <MyRuntimeProvider serverUrl={process.env.NEXT_PUBLIC_BACKEND_URL+"bph/chat"}>
 
     <MainThread 
       welcome={{
@@ -52,6 +52,6 @@ export default function Page2() {
       tools={[SuggestionBtnTool]} 
       assistantMessage={{ components: { Text: MarkdownText } }} 
     />
-    </MyRuntimeProvider_BPH>
+    </MyRuntimeProvider>
   );
 }
