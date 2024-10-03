@@ -39,7 +39,7 @@ const MainThread: FC<ThreadConfig> = (config) => {
   };
 export default function Page1() {
   return (
-    <MyRuntimeProvider serverUrl={process.env.NEXT_PUBLIC_BACKEND_URL+"cua/chat"}>
+    <MyRuntimeProvider serverUrl={"http://0.0.0.0:8001/chat"}>
 
           <MainThread 
             welcome={{

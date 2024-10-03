@@ -7,12 +7,6 @@ import {
   type ChatModelAdapter,
 } from "@assistant-ui/react";
 
-const SERVER_URL: string | undefined = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-if (!SERVER_URL) {
-  throw new Error("NEXT_PUBLIC_BACKEND_URL is not defined");
-}
-
 
 type Content = {
   type: "text" | "tool-call";
