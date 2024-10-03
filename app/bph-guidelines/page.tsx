@@ -40,7 +40,7 @@ const MainThread: FC<ThreadConfig> = (config) => {
 
 export default function Page2() {
   return (
-    <MyRuntimeProvider serverUrl={"https://tli.koyeb.app/bph-guidelines-8f90dsauhi/chat"}>
+    <MyRuntimeProvider serverUrl={"https://tli.koyeb.app/cua-guidelines-fds9a890uyh/chat"}>
 
     <MainThread 
       welcome={{
