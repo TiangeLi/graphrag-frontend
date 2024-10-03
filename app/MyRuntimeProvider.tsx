@@ -7,11 +7,11 @@ import {
   type ChatModelAdapter,
 } from "@assistant-ui/react";
 
-const SERVER_URL: string | undefined = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-if (!SERVER_URL) {
-  throw new Error("NEXT_PUBLIC_BACKEND_URL is not defined");
-}
+type MyRuntimeProviderProps = {
+  children: ReactNode;
+  serverUrl: string;
+};
 
 
 type Content = {
@@ -22,16 +22,16 @@ type Content = {
   result?: any;
 }
  
-const MyModelAdapter: ChatModelAdapter = {
-    async *run({ messages, abortSignal }) {
-      const response = await fetch(SERVER_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ messages }),
-        signal: abortSignal,
-      });
+const MyModelAdapter = (serverUrl: string): ChatModelAdapter => ({
+  async *run({ messages, abortSignal }) {
+    const response = await fetch(serverUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ messages }),
+      signal: abortSignal,
+    });
   
       if (!response.body) {
         throw new Error("No response body");
@@ -139,18 +139,17 @@ const MyModelAdapter: ChatModelAdapter = {
         if (done) { break }
       }
     }
-  };
+  });
  
-export function MyRuntimeProvider({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
-  const runtime = useLocalRuntime(MyModelAdapter);
- 
-  return (
-    <AssistantRuntimeProvider runtime={runtime}>
-      {children}
-    </AssistantRuntimeProvider>
-  );
-}
+  export function MyRuntimeProvider({
+    children,
+    serverUrl,
+  }: MyRuntimeProviderProps) {
+    const runtime = useLocalRuntime(MyModelAdapter(serverUrl));
+   
+    return (
+      <AssistantRuntimeProvider runtime={runtime}>
+        {children}
+      </AssistantRuntimeProvider>
+    );
+  }

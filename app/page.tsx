@@ -1,99 +1,48 @@
 "use client";
 
-import React, { FC } from 'react';
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import {
-  Thread, 
-  ThreadWelcome,
-  Composer,
-  type ThreadConfig,
-  MessagePrimitive
-} from "@assistant-ui/react";
-import { makeMarkdownText } from "@assistant-ui/react-markdown";
-import { SuggestionBtnTool } from "@/components/tools/price-snapshot/SuggestionBtnTool";
-
-const MarkdownText = makeMarkdownText();
-
-const MyAssistantMessage = () => {
-  return (
-  <MessagePrimitive.Root >
-    <MessagePrimitive.Content />
-  </MessagePrimitive.Root>
-  )
-};
-
-const MyThread: FC<ThreadConfig> = (config) => {
-  return (
-    <Thread.Root config={config}>
-      <Thread.Viewport>
-        <Thread.Messages components={{
-          AssistantMessage: MyAssistantMessage,
-          UserMessage: () => null
-        }}/>
-      </Thread.Viewport>
-    </Thread.Root>
-  );
-};
-
-const MyThreadWelcome: FC = () => {
-  return (
-    <ThreadWelcome.Root>
-      <ThreadWelcome.Center>
-        <ThreadWelcome.Avatar />
-        <ThreadWelcome.Message message="Ask me anything about BPH!" />
-      </ThreadWelcome.Center>
-      <ThreadWelcome.Suggestions />
-    </ThreadWelcome.Root>
-  );
-};
-
-const MainThread: FC<ThreadConfig> = (config) => {
-  return (
-    <Thread.Root config={config}>
-      <Thread.Viewport>
-        <MyThreadWelcome />
-        <Thread.Messages />
-        <Thread.ViewportFooter>
-          <Thread.ScrollToBottom />
-          <Composer />
-        </Thread.ViewportFooter>
-      </Thread.Viewport>
-    </Thread.Root>
-  );
-};
+import React from 'react';
+import Link from 'next/link';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <ResizablePanelGroup direction="horizontal">
-      <ResizablePanel>
-        <main className="h-full w-full">
-          <MainThread 
-            welcome={{
-              suggestions: [
-                {
-                  prompt: "How does Rezum work?",
-                },
-                {
-                  prompt: "What are the possible side effects of Urolift?",
-                },
-              ],
-            }}
-            tools={[SuggestionBtnTool]} 
-            assistantMessage={{ components: { Text: MarkdownText } }} 
-          />
-        </main>
-      </ResizablePanel>
-      
-    </ResizablePanelGroup>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8 text-center">Pick a Chat PPT</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <ServerCard 
+          title="BPH" 
+          description="BPH Specific Guidelines, from the CUA, AUA, and EAU"
+          server="bph"
+        />
+        <ServerCard 
+          title="CUA Guidelines" 
+          description="Chat with all 61 CUA Guidelines"
+          server="all_guidelines"
+        />
+      </div>
+    </div>
   );
 }
 
+interface ServerCardProps {
+  title: string;
+  description: string;
+  server: string;
+}
 
-//<ResizableHandle />
- //     <ResizablePanel>
-   //     <MyThread/>
-    //  </ResizablePanel>
+const ServerCard: React.FC<ServerCardProps> = ({ title, description, server }) => {
+  return (
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Link href={`/chat?server=${server}`} passHref>
+          <Button className="w-full">Connect</Button>
+        </Link>
+      </CardContent>
+    </Card>
+  );
+};
