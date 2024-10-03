@@ -40,7 +40,7 @@ const MainThread: FC<ThreadConfig> = (config) => {
 
 export default function Page2() {
   return (
-    <MyRuntimeProvider serverUrl={"http://aui-graphrag.auigraphrag.internal:8000/chat"}>
+    <MyRuntimeProvider serverUrl={"https://tli-bph-graphrag-guidelines-8x789sxhsy.koyeb.app/bph-guidelines/chat"}>
 
     <MainThread 
       welcome={{
