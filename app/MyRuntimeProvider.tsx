@@ -28,16 +28,19 @@ const MyModelAdapter = (serverUrl: string): ChatModelAdapter => ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // Add any additional headers your server might require
       },
       body: JSON.stringify({ messages }),
       signal: abortSignal,
+      mode: "cors", // Explicitly set CORS mode
+      credentials: "include", // Include credentials if your server supports it
     });
   
-      if (!response.body) {
-        throw new Error("No response body");
-      }
+    if (!response.body) {
+      throw new Error("No response body");
+    }
   
-      const reader = response.body.getReader();
+    const reader = response.body.getReader();
       const decoder = new TextDecoder();
   
       let buffer = '';
