@@ -45,8 +45,8 @@ export default function Page2() {
     <MainThread 
       welcome={{
         suggestions: [
+            { prompt: "i have a 75g prostate. My main issue is difficulty urinating. How do i decide between the MISTs?" },
             { prompt: "How does Rezum work?" },
-            { prompt: "What are the possible side effects of Urolift?" },
         ],
       }}
       tools={[SuggestionBtnTool]} 
